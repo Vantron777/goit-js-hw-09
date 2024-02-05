@@ -15,7 +15,9 @@ if (getLocalStorageData !== null && getLocalStorageData !== undefined) {
       formObject.email = localStorageData.email;
       formObject.message = localStorageData.message;
     }
-  } catch (e) {}
+  } catch (e) {
+    console.error('Error parsing JSON data:', e);
+  }
 }
 
 form.addEventListener('input', () => {
@@ -31,8 +33,8 @@ form.addEventListener('input', () => {
 form.addEventListener('submit', e => {
   e.preventDefault();
 
-  const email = e.currentTarget.elements.email.value;
-  const message = e.currentTarget.elements.message.value;
+  const email = e.currentTarget.elements.email.value.trim();
+  const message = e.currentTarget.elements.message.value.trim();
 
   if (email === '' || message === '') {
     alert('All form fields must be filled in');
